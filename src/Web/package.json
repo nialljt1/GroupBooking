@@ -1,0 +1,19 @@
+{
+  "jspm": {
+    "directories": {
+      "baseURL": "wwwroot"
+    },
+    "dependencies": {
+      "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",
+      "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.1",
+      "aurelia-framework": "npm:aurelia-framework@^1.0.6",
+      "aurelia-table": "github:tochoromero/aurelia-table@^0.1.10",
+      "bootstrap": "github:twbs/bootstrap@^3.3.7",
+      "jquery-ui": "github:components/jqueryui@^1.12.1",
+      "moment": "npm:moment@^2.15.1"
+    },
+    "devDependencies": {
+      "typescript": "npm:typescript@^1.6.2"
+    }
+  }
+}

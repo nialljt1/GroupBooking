@@ -1,0 +1,57 @@
+﻿<template>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="http://placehold.it/150x50&text=Logo" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li show.bind="!isLoggedIn">
+                        <a href="#/welcome">Welcome</a>
+                    </li>
+                    <li>
+                        <a href="#/bookings">Bookings</a>
+                    </li>
+                    <li>
+                        <a href="#/help">Help</a>
+                    </li>
+                    <li>
+                        <a href="#/about">About</a>
+                    </li>
+                    <li>
+                        <a href="#/bootstrapForm">Bootstrap Form</a>
+                    </li>                    
+                    <li show.bind="isLoggedIn">
+                        <a href="#/logout" click.delegate="logout()">Log out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <router-view></router-view>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.container -->
+</template>
