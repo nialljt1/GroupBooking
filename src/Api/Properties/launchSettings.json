@@ -3,21 +3,23 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5001",
+      "applicationUrl": "http://localhost:57832/",
       "sslPort": 0
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchUrl": "api/values",
+      "launchBrowser": true,
+      "launchUrl": "api/v1/Bookings/GetBookingById/7",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Api": {
       "commandName": "Project",
-      "launchUrl": "http://localhost:5000/api/values",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000/api/v1/Bookings/GetBookingById/7",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

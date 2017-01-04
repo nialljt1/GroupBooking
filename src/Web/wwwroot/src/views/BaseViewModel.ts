@@ -11,8 +11,8 @@ export class BaseViewModel {
     constructor(private http: HttpClient) { }
 
     activate() {
-        ////this.apiUrl = "http://localhost:5001/GroupBookingApi/Bookings/"
-        this.apiUrl = "http://localhost:5001/Bookings/"
+        ////this.apiUrl = "http://localhost:5001/GroupBookingAppApi/Bookings/"
+        this.apiUrl = "http://localhost/gb/api/v1/Bookings/"
         this.setup();
     }
 
@@ -20,7 +20,7 @@ export class BaseViewModel {
         var config = {
             authority: "http://localhost/IdentityServer2",
             client_id: "js",
-            redirect_uri: "http://localhost/GroupBooking/src/callback.html",
+            redirect_uri: "http://localhost/GroupBookingApp/src/callback.html",
             response_type: "id_token token",
             scope: "openid profile api1",
             post_logout_redirect_uri: "http://localhost/GroupBookingApp/index.html",

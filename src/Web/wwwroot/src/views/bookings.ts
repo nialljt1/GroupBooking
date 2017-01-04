@@ -22,7 +22,7 @@ export class Bookings {
 
     bind() {
         ////this.apiUrl = "http://localhost:5001/GroupBookingApi/Bookings/"
-        this.apiUrl = "http://localhost:5001/Bookings/FilterBookings/1"
+        this.apiUrl = "http://localhost/gb/api/v1/Bookings/FilterBookings/1"
         this.baseViewModel.setup();
         this.setup();
     }

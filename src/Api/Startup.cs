@@ -1,13 +1,11 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using Api.Data;
+﻿using Api.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Api
 {
@@ -20,18 +18,30 @@ namespace Api
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
+            if (env.IsEnvironment("Development"))
+            {
+                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
+                builder.AddApplicationInsightsSettings(developerMode: true);
+            }
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"data source=DESKTOP-82VF481\SQLEXPRESS;initial catalog=GroupBookings;integrated security=True;MultipleActiveResultSets=True;";
-            services.AddDbContext<AppContext>(options => options.UseSqlServer(connection));
-            services.AddSingleton<IBookingsRepository, BookingsRepository>();
-            services.AddCors(options=>
+            var connection = @"data source=169.50.111.5,781;initial catalog=nialljt1_GroupBookings;Uid=nialljt1_nialljt1;password=zxTx93@2;MultipleActiveResultSets=True;";
+            services.AddDbContext<Api.AppContext>(options => options.UseSqlServer(connection));
+
+            // Add framework services.
+            services.AddApplicationInsightsTelemetry(Configuration);
+
+            services.AddMvc();
+
+            services.AddCors(options =>
             {
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
@@ -40,9 +50,9 @@ namespace Api
                         .AllowAnyHeader()
                         .AllowAnyMethod();
 
-                   //// policy.WithOrigins("http://localhost:5001")
-                   ////.AllowAnyHeader()
-                   ////.AllowAnyMethod();
+                    policy.WithOrigins("http://localhost/gb")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
                 });
 
                 ////// this defines a CORS policy called "default"
@@ -55,17 +65,22 @@ namespace Api
             });
 
             services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+            .AddAuthorization()
+            .AddJsonFormatters();
+
+            services.AddLogging();
+            services.AddSingleton<IBookingsRepository, BookingsRepository>();
+            services.AddSwaggerGen();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            // this uses the policy called "default"
             app.UseCors("default");
+            app.UseApplicationInsightsRequestTelemetry();
+            app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
@@ -76,6 +91,8 @@ namespace Api
             });
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUi("swagger/ui", "/gb/swagger/v1/swagger.json");
         }
     }
 }

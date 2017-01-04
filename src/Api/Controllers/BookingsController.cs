@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     ////[Authorize]
     public class BookingsController : ControllerBase
     {
