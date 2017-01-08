@@ -15,7 +15,7 @@ namespace Api.Data
             _appContext = appContext;
         }
 
-        public int AddBooking(ClientBooking clientBooking)
+        public int AddBooking(ClientBookingModel clientBooking)
         {
             var booking = new Booking();
             booking.OrganiserForename = clientBooking.FirstName;
@@ -35,7 +35,7 @@ namespace Api.Data
             return booking.Id;
         }
 
-        public void UpdateBooking(ClientBooking clientBooking)
+        public void UpdateBooking(ClientBookingModel clientBooking)
         {
             var booking = _appContext.Bookings.Find(clientBooking.Id);
             booking.OrganiserForename = clientBooking.FirstName;
@@ -51,7 +51,7 @@ namespace Api.Data
             _appContext.SaveChanges();
         }
 
-        public IList<ClientBooking> FilterBookings(int restaurantId, FilterCriteria filterCriteria)
+        public IList<ClientBookingModel> FilterBookings(int restaurantId, FilterCriteria filterCriteria)
         {
             var bookings = _appContext.Bookings
                 .Where(b => b.Menu.RestaurantId == restaurantId);
@@ -77,7 +77,7 @@ namespace Api.Data
             bookings = bookings.Where(b => b.IsCancelled == filterCriteria.isCancelled); 
 
             return bookings
-                .Select(b => new ClientBooking
+                .Select(b => new ClientBookingModel
                 {
                     Id  = b.Id,
                     FirstName = b.OrganiserForename,
@@ -92,11 +92,11 @@ namespace Api.Data
                 .ToList();
         }
 
-        public ClientBooking GetBookingById(int id)
+        public ClientBookingModel GetBookingById(int id)
         {
             var booking = _appContext.Bookings.Find(id);
             var menuName = _appContext.Menus.Find(booking.MenuId).Name;
-            return new ClientBooking
+            return new ClientBookingModel
             {
                 Id = booking.Id,
                 FirstName = booking.OrganiserForename,
@@ -107,6 +107,13 @@ namespace Api.Data
                 NumberOfDiners = booking.NumberOfDiners,
                 Menu = menuName
             };            
+        }
+
+        public void DeleteBooking(int id)
+        {
+            var booking = _appContext.Bookings.Find(id);
+            _appContext.Bookings.Remove(booking);
+            _appContext.SaveChanges();
         }
     }
 }

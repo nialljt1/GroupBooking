@@ -24,8 +24,7 @@ export class AddBooking {
     }
 
     activate() {
-        ////this.apiUrl = "http://localhost:5001/TodoAppApi/Bookings/"
-        this.apiUrl = "http://localhost:5001/Bookings/"
+        this.apiUrl = this.baseViewModel.apiUrl;
         this.baseViewModel.setup();
     }
 

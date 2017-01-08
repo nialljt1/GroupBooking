@@ -34,9 +34,8 @@ System.register(["./baseViewModel", "./../Components/date-format", "aurelia-fram
                     this.dateFormatValueConverter = dateFormatValueConverter;
                 }
                 activate(params) {
-                    ////this.apiUrl = "http://localhost:5001/TodoAppApi/Bookings/"
                     this.baseViewModel.setup();
-                    this.apiUrl = "http://localhost:5001/Bookings/GetBookingById/" + params.id;
+                    this.apiUrl = this.baseViewModel.apiUrl + "GetBookingById/" + params.id;
                     this.loadBooking();
                 }
                 showBookingDetails() {
@@ -79,7 +78,7 @@ System.register(["./baseViewModel", "./../Components/date-format", "aurelia-fram
                 }
                 updateBooking() {
                     var _this = this;
-                    _this.apiUrl = "http://localhost:5001/Bookings/Update";
+                    _this.apiUrl = this.baseViewModel.apiUrl + "Update";
                     this.baseViewModel.mgr.getUser().then(function (user) {
                         var booking = {
                             id: _this.booking.id,

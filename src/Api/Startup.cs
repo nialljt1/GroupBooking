@@ -1,4 +1,5 @@
 ﻿using Api.Data;
+using Exceptionless;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -70,6 +71,8 @@ namespace Api
 
             services.AddLogging();
             services.AddSingleton<IBookingsRepository, BookingsRepository>();
+            services.AddSingleton<IMenuRepository, MenuRepository>();
+            services.AddSingleton<IDinersRepository, DinersRepository>();
             services.AddSwaggerGen();
         }
 
@@ -93,6 +96,7 @@ namespace Api
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUi("swagger/ui", "/gb/swagger/v1/swagger.json");
+            app.UseExceptionless("d8YPf5iMRQYRRu6n909GlWfNDaUd2eFWD40GSmho");
         }
     }
 }

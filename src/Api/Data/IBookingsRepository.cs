@@ -6,10 +6,11 @@ namespace Api.Data
 {
     public interface IBookingsRepository
     {
-        int AddBooking(ClientBooking booking);
+        int AddBooking(ClientBookingModel booking);
 
-        void UpdateBooking(ClientBooking booking);
-        ClientBooking GetBookingById(int id);
-        IList<ClientBooking> FilterBookings(int restaurantId, FilterCriteria filterCriteria);
+        void UpdateBooking(ClientBookingModel booking);
+        ClientBookingModel GetBookingById(int id);
+        IList<ClientBookingModel> FilterBookings(int restaurantId, FilterCriteria filterCriteria);
+        void DeleteBooking(int id);
     }
 }

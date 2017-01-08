@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Api.Data;
 using Api.Models;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using Api.ClientModels;
 using System.Linq;
+using Exceptionless;
 
 namespace Api.Controllers
 {
@@ -23,30 +25,34 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ClientBooking booking)
+        public IActionResult Post([FromBody] ClientBookingModel booking)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             try
             {
-                var bookingId = Repo.AddBooking(booking);
-                var url = Url.RouteUrl("GetBookingByIdRoute", new { id = bookingId }, Request.Scheme,
-                    Request.Host.ToUriComponent());
-                // TODO: Need to handle navigating to edit page after adding
+                var bookingId = Repo.AddBooking(booking);   
                 return Ok(bookingId);
 
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 return BadRequest();
             }
         }
 
         [HttpPut]
-        [Route("Update", Name = "UpdateBooking")]
-        public IActionResult Update([FromBody] ClientBooking booking)
+        [Route("Update")]
+        public IActionResult Update([FromBody] ClientBookingModel booking)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             try
             {
@@ -56,22 +62,41 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 return BadRequest();
             }
         }
 
         // GET api/bookings/2
         [HttpGet()]
-        [Route("GetBookingById/{id}", Name = "GetBookingById")]
-        public ClientBooking GetBookingById(int id)
+        [Route("GetBookingById/{id}")]
+        public ClientBookingModel GetBookingById(int id)
         {
             return Repo.GetBookingById(id);
+        }
+
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                Repo.DeleteBooking(id);
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                return BadRequest();
+            }
         }
 
         // GET GetBookings/1
         [HttpPost]
         [Route("FilterBookings/{restaurantId}", Name = "FilterBookings")]
-        public IEnumerable<ClientBooking> FilterBookings(int restaurantId, [FromBody] FilterCriteria filterCriteria)
+        public IEnumerable<ClientBookingModel> FilterBookings(int restaurantId, [FromBody] FilterCriteria filterCriteria)
         {
             return Repo.FilterBookings(restaurantId, filterCriteria);
         }

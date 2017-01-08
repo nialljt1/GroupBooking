@@ -32,8 +32,7 @@ System.register(["./baseViewModel", "aurelia-framework", 'aurelia-router', "aure
                     this.baseViewModel = baseViewModel;
                 }
                 bind() {
-                    ////this.apiUrl = "http://localhost:5001/GroupBookingApi/Bookings/"
-                    this.apiUrl = "http://localhost/gb/api/v1/Bookings/FilterBookings/1";
+                    this.apiUrl = "http://fc020e41.ngrok.io/gb/api/v1/Bookings/FilterBookings/1";
                     this.baseViewModel.setup();
                     this.setup();
                 }

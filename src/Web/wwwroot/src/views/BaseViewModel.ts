@@ -11,12 +11,11 @@ export class BaseViewModel {
     constructor(private http: HttpClient) { }
 
     activate() {
-        ////this.apiUrl = "http://localhost:5001/GroupBookingAppApi/Bookings/"
-        this.apiUrl = "http://localhost/gb/api/v1/Bookings/"
         this.setup();
     }
 
     setup() {
+        this.apiUrl = "http://fc020e41.ngrok.io/gb/api/v1/Bookings/"
         var config = {
             authority: "http://localhost/IdentityServer2",
             client_id: "js",

@@ -12,7 +12,7 @@ namespace Api
         { }
 
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<Diner> Diner { get; set; }
+        public DbSet<Diner> Diners { get; set; }
         public DbSet<DinerMenuItem> DinerMenuItems { get; set; }
         public DbSet<Email> Emails { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }

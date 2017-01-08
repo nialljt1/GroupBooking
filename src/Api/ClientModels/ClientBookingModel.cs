@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Api.ClientModels
 {
-    public class ClientBooking
+    public class ClientBookingModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

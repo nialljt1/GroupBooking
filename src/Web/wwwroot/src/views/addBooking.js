@@ -31,8 +31,7 @@ System.register(["./baseViewModel", "./../Components/date-format", "aurelia-fram
                     this.dateFormatValueConverter = dateFormatValueConverter;
                 }
                 activate() {
-                    ////this.apiUrl = "http://localhost:5001/TodoAppApi/Bookings/"
-                    this.apiUrl = "http://localhost:5001/Bookings/";
+                    this.apiUrl = this.baseViewModel.apiUrl;
                     this.baseViewModel.setup();
                 }
                 addBooking() {

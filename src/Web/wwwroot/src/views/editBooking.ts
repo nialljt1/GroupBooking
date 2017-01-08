@@ -19,9 +19,8 @@ export class EditBooking {
     }
 
     activate(params) {
-        ////this.apiUrl = "http://localhost:5001/TodoAppApi/Bookings/"
         this.baseViewModel.setup();
-        this.apiUrl = "http://localhost:5001/Bookings/GetBookingById/" + params.id
+        this.apiUrl = this.baseViewModel.apiUrl + "GetBookingById/" + params.id
         this.loadBooking();
     }
 
@@ -72,7 +71,7 @@ export class EditBooking {
 
     updateBooking() {
         var _this = this;
-        _this.apiUrl = "http://localhost:5001/Bookings/Update";
+        _this.apiUrl = this.baseViewModel.apiUrl + "Update";
         this.baseViewModel.mgr.getUser().then(function (user) {
             var booking = {
                 id: _this.booking.id,
