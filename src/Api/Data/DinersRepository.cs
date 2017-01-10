@@ -21,9 +21,11 @@ namespace Api.Data
             diner.Forename = dinerModel.Forename;
             diner.Surname = dinerModel.Surname;
             diner.BookingId = dinerModel.BookingId;
-            diner.CreatedById = dinerModel.UserId;
+            diner.AddedByForename = dinerModel.AddedByForename;
+            diner.AddedBySurname = dinerModel.AddedBySurname;
+            diner.AddedByEmailAddress = dinerModel.AddedByEmailAddress;
+            diner.AddedAt = DateTimeOffset.Now;
             diner.LastUpdatedById = dinerModel.UserId;
-            diner.CreatedAt = DateTimeOffset.Now;
             diner.LastUpdatedAt = DateTimeOffset.Now;
             _appContext.Diners.Add(diner);
             _appContext.SaveChanges();
@@ -49,65 +51,71 @@ namespace Api.Data
 
         public IList<ClientDinerModel> GetDinersForBooking(int bookingId)
         {
-            var diners = _appContext.Diners.Where(d => d.BookingId == bookingId)
-                .Select(d => new ClientDinerModel
-                {
-                    Id = d.Id,
-                    Forename = d.Forename,
-                    Surname = d.Surname
-                })
-                .OrderBy(d => d.Surname)
-                .ToList();
+            var dinerModels = new List<ClientDinerModel>();
 
-            var booking = _appContext.Bookings.Find(bookingId);
-            var menuSectionIds = _appContext.MenuSections
-                .Where(d => d.MenuId == booking.MenuId)
+            var menuSections = _appContext.Bookings
+                .Where(b => b.Id == bookingId)
+                .Select(b => b.Menu)
+                .SelectMany(m => m.MenuSections)
                 .OrderBy(s => s.DisplayOrder)
-                .Select(s => s.Id)
+                .Select(s => new { s.Id, s.Name })
                 .ToList();
 
             var dinerMenuItems = _appContext.DinerMenuItems
             .Where(d => d.Diner.BookingId == bookingId)
             .Select(s => new ClientMenuItemModel
             {
+                MenuItemId = s.MenuItemId,
+                DinerId = s.DinerId,
+                Note = s.Note,
                 Number = s.MenuItem.Number,
                 Name = s.MenuItem.Name,
                 Description = s.MenuItem.Description,
                 DisplayOrder = s.MenuItem.DisplayOrder,
-                MenuSectionId = s.MenuItem.MenuSectionId
+                MenuSectionId = s.MenuItem.MenuSectionId            
             })
             .ToList();
 
-            ////var array1 = new object[5];
-
-            ////foreach (var diner in diners)
-            ////{
-            ////    var test = new
-            ////    {
-            ////        Id = diner.Id,
-            ////        Forename = diner.Forename,
-            ////        Surname = diner.Surname,
-            ////        starter = 1, main = 2, dessert = 4 };
-            ////    array1[0] = test;
-            ////}
-
-
-            // amend diner model to contain a list of menu sections
-            // amend menu sections to contain a list of menu items
-            // cycle through each diner
-            // cycle through menu sections
-            // include items for each model
-
-            var menuItems = _appContext.Diners.Where(d => d.BookingId == bookingId)
+            var diners = _appContext.Diners.Where(d => d.BookingId == bookingId)
             .Select(d => new ClientDinerModel
             {
                 Id = d.Id,
                 Forename = d.Forename,
-                Surname = d.Surname
+                Surname = d.Surname,
+                AddedByEmailAddress = d.AddedByEmailAddress,
+                AddedByForename = d.AddedByForename,
+                AddedBySurname = d.AddedBySurname,
+                BookingId = bookingId
             })
+            .OrderBy(d => d.Surname)
             .ToList();
 
-            var dinerModels = new List<ClientDinerModel>();
+            foreach (var diner in diners)
+            {
+                foreach (var menuSection in menuSections)
+                {                   
+                    var menuItem = dinerMenuItems
+                        .Where(i => i.DinerId == diner.Id)
+                        .FirstOrDefault(i => i.MenuSectionId == menuSection.Id);
+
+                    if (menuItem != null)
+                    {
+                        var clientDinerMenuItemModel = new ClientDinerMenuItemModel();
+                        clientDinerMenuItemModel.MenuSectionId = menuSection.Id;
+                        clientDinerMenuItemModel.MenuSectionName = menuSection.Name;
+                        clientDinerMenuItemModel.MenuItemId = menuItem.MenuItemId;
+                        clientDinerMenuItemModel.DinerId = diner.Id;
+                        clientDinerMenuItemModel.Name = menuItem.Name;
+                        clientDinerMenuItemModel.Description = menuItem.Description;
+                        clientDinerMenuItemModel.DisplayOrder = menuItem.DisplayOrder;
+                        clientDinerMenuItemModel.DinerMenuItemNote = menuItem.Note;
+                        diner.MenuItems.Add(clientDinerMenuItemModel);
+                    }
+                }
+
+                dinerModels.Add(diner);
+            }
+
             return dinerModels;
         }
     }

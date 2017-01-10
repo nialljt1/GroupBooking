@@ -17,7 +17,7 @@ namespace Api.Controllers
 
         // GET GetMenuSections/1
         [HttpGet]
-        [Route("GetMenuSections/{menuId}", Name = "GetMenuSections")]
+        [Route("GetMenuSections/{menuId}")]
         public IEnumerable<ClientModels.ClientMenuSectionModel> GetMenuSections(int menuId)
         {
             return Repo.GetMenuSections(menuId);

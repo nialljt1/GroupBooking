@@ -8,9 +8,10 @@ using Api;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20170110103339_AddNoteToDinerMenuItem")]
+    partial class AddNoteToDinerMenuItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -73,21 +74,11 @@ namespace Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTimeOffset>("AddedAt");
-
-                    b.Property<string>("AddedByEmailAddress")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<string>("AddedByForename")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AddedBySurname")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<int>("BookingId");
+
+                    b.Property<DateTimeOffset>("CreatedAt");
+
+                    b.Property<string>("CreatedById");
 
                     b.Property<string>("Forename")
                         .IsRequired()
@@ -104,6 +95,8 @@ namespace Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookingId");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("LastUpdatedById");
 
@@ -426,6 +419,10 @@ namespace Api.Migrations
                         .WithMany("Diners")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Models.Identity.AspNetUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("Api.Models.Identity.AspNetUser", "LastUpdatedBy")
                         .WithMany()

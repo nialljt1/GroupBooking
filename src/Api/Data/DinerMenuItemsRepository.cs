@@ -1,8 +1,5 @@
 ﻿using Api.ClientModels;
 using Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Api.Data
 {
@@ -15,11 +12,12 @@ namespace Api.Data
             _appContext = appContext;
         }
 
-        public void AddDinerMenuItem(int dinerId, int menuItemId)
+        public void AddDinerMenuItem(ClientDinerMenuItemModel dinerMenuItemModel)
         {
             var dinerMenuItem = new DinerMenuItem();
-            dinerMenuItem.DinerId = dinerId;
-            dinerMenuItem.MenuItemId = menuItemId;
+            dinerMenuItem.DinerId = dinerMenuItemModel.DinerId;
+            dinerMenuItem.MenuItemId = dinerMenuItemModel.MenuItemId;
+            dinerMenuItem.Note = dinerMenuItemModel.DinerMenuItemNote;
             _appContext.DinerMenuItems.Add(dinerMenuItem);
             _appContext.SaveChanges();
         }

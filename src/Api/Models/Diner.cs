@@ -9,7 +9,7 @@ namespace Api.Models
     {
         public Diner()
         {
-            CreatedAt = DateTimeOffset.Now;
+            AddedAt = DateTimeOffset.Now;
             DinerMenuItems = new HashSet<DinerMenuItem>();
         }
         public int Id { get; set; }
@@ -22,9 +22,13 @@ namespace Api.Models
         [Required, StringLength(50)]
         public string Surname { get; set; }
 
-        public DateTimeOffset CreatedAt { get; set; }
-        public string CreatedById { get; set; }
-        public virtual AspNetUser CreatedBy { get; set; }
+        public DateTimeOffset AddedAt { get; set; }
+        [Required, StringLength(50)]
+        public string AddedByForename { get; set; }
+        [Required, StringLength(50)]
+        public string AddedBySurname { get; set; }
+        [Required, StringLength(256)]
+        public string AddedByEmailAddress { get; set; }
         public string LastUpdatedById { get; set; }
         public virtual AspNetUser LastUpdatedBy { get; set; }
         public DateTimeOffset LastUpdatedAt { get; set; }

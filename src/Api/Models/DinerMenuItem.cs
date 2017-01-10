@@ -11,5 +11,8 @@ namespace Api.Models
 
         public int MenuItemId { get; set; }
         public virtual MenuItem MenuItem { get; set; }
+
+        [StringLength(1000)]
+        public string Note { get; set; }
     }
 }

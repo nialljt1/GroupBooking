@@ -1,4 +1,5 @@
-﻿using Api.Data;
+﻿using Api.ClientModels;
+using Api.Data;
 using Exceptionless;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,12 +19,12 @@ namespace Api.Controllers
 
         // Post
         [HttpPost]
-        [Route("Post", Name = "Post")]
-        public IActionResult Post(int dinerId, int menuItemId)
+        [Route("Post")]
+        public IActionResult Post([FromBody] ClientDinerMenuItemModel dinerMenuItemModel)
         {
             try
             {
-                Repo.AddDinerMenuItem(dinerId, menuItemId);
+                Repo.AddDinerMenuItem(dinerMenuItemModel);
                 return Ok();
 
             }
@@ -35,7 +36,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete/{id}", Name = "Delete")]
+        [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             try

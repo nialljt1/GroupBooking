@@ -8,9 +8,10 @@ using Api;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20170110114306_AddedFieldsForDiner")]
+    partial class AddedFieldsForDiner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -76,15 +77,12 @@ namespace Api.Migrations
                     b.Property<DateTimeOffset>("AddedAt");
 
                     b.Property<string>("AddedByEmailAddress")
-                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<string>("AddedByForename")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("AddedBySurname")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<int>("BookingId");
