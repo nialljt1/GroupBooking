@@ -73,6 +73,7 @@ namespace Api
             services.AddSingleton<IBookingsRepository, BookingsRepository>();
             services.AddSingleton<IMenuRepository, MenuRepository>();
             services.AddSingleton<IDinersRepository, DinersRepository>();
+            services.AddSingleton<IDinerMenuItemsRepository, DinerMenuItemsRepository>();
             services.AddSwaggerGen();
         }
 

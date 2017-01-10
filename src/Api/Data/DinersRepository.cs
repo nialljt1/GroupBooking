@@ -56,6 +56,7 @@ namespace Api.Data
                     Forename = d.Forename,
                     Surname = d.Surname
                 })
+                .OrderBy(d => d.Surname)
                 .ToList();
 
             var booking = _appContext.Bookings.Find(bookingId);
@@ -67,12 +68,30 @@ namespace Api.Data
 
             var dinerMenuItems = _appContext.DinerMenuItems
             .Where(d => d.Diner.BookingId == bookingId)
-            .Select(s => new { s.MenuItem.Number, s.MenuItem.Name, s.MenuItem.Description, s.MenuItem.DisplayOrder, s.MenuItem.MenuSectionId })
+            .Select(s => new ClientMenuItemModel
+            {
+                Number = s.MenuItem.Number,
+                Name = s.MenuItem.Name,
+                Description = s.MenuItem.Description,
+                DisplayOrder = s.MenuItem.DisplayOrder,
+                MenuSectionId = s.MenuItem.MenuSectionId
+            })
             .ToList();
 
-            // review and commit what you've done
-            // before doing any of the below need to create api methods for adding and deleting menu items
-            // TODO: Create model for menu items
+            ////var array1 = new object[5];
+
+            ////foreach (var diner in diners)
+            ////{
+            ////    var test = new
+            ////    {
+            ////        Id = diner.Id,
+            ////        Forename = diner.Forename,
+            ////        Surname = diner.Surname,
+            ////        starter = 1, main = 2, dessert = 4 };
+            ////    array1[0] = test;
+            ////}
+
+
             // amend diner model to contain a list of menu sections
             // amend menu sections to contain a list of menu items
             // cycle through each diner
