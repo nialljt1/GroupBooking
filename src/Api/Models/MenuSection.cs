@@ -19,6 +19,9 @@ namespace Api.Models
         [Required, StringLength(50)]
         public string Name { get; set; }
 
+        [StringLength(1000)]
+        public string Notes { get; set; }
+
         [Required]
         public int DisplayOrder { get; set; }
 
