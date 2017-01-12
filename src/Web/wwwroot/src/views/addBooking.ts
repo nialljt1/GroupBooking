@@ -30,7 +30,7 @@ export class AddBooking {
 
     addBooking() {
         var _this = this;        
-        this.baseViewModel.mgr.getUser().then(function (user) {
+        ////this.baseViewModel.mgr.getUser().then(function (user) {
             var newBooking = {
                 firstName: _this.firstName,
                 surname: _this.surname,
@@ -40,20 +40,20 @@ export class AddBooking {
                 numberOfDiners: _this.numberOfDiners
             };
 
-            if (user)
-            {
-                _this.http.configure(config => {
-                    config
-                        .withDefaults({
-                            headers: {
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'Fetch',
-                                'Authorization': "Bearer " + user.access_token
-                            }
-                        })
+            ////if (user)
+            ////{
+            ////    _this.http.configure(config => {
+            ////        config
+            ////            .withDefaults({
+            ////                headers: {
+            ////                    'Accept': 'application/json',
+            ////                    'X-Requested-With': 'Fetch',
+            ////                    'Authorization': "Bearer " + user.access_token
+            ////                }
+            ////            })
 
-                });
-            }
+            ////    });
+            ////}
 
             _this.http.fetch(_this.apiUrl, {
                 method: "post",
@@ -64,7 +64,7 @@ export class AddBooking {
                 ////console.log("booking added: ", response);
             });
 
-        });    
+        //});    
     }
 }
 

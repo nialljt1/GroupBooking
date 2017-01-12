@@ -34,7 +34,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"data source=169.50.111.5,781;initial catalog=nialljt1_GroupBookings;Uid=nialljt1_nialljt1;password=zxTx93@2;MultipleActiveResultSets=True;";
+            var connection = Configuration.GetConnectionString("GroupBookingsDatabase");
             services.AddDbContext<Api.AppContext>(options => options.UseSqlServer(connection));
 
             // Add framework services.
@@ -54,6 +54,10 @@ namespace Api
                     policy.WithOrigins("http://localhost/gb")
                    .AllowAnyHeader()
                    .AllowAnyMethod();
+
+                    policy.WithOrigins("http://127.0.0.1:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();                    
                 });
 
                 ////// this defines a CORS policy called "default"
@@ -86,13 +90,13 @@ namespace Api
             app.UseApplicationInsightsRequestTelemetry();
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            {
-                Authority = "http://localhost/IdentityServer2",
-                ScopeName = "api1",
+            ////app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            ////{
+            ////    Authority = "http://localhost/IdentityServer2",
+            ////    ScopeName = "api1",
 
-                RequireHttpsMetadata = false
-            });
+            ////    RequireHttpsMetadata = false
+            ////});
 
             app.UseMvc();
             app.UseSwagger();

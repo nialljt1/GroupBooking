@@ -19,7 +19,6 @@ namespace Api.Models
 
         public int? Number { get; set; }
 
-        [Required]
         public int DisplayOrder { get; set; }
     }
 }

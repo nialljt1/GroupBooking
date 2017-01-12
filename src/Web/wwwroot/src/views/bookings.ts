@@ -20,9 +20,9 @@ export class Bookings {
     router: Router;
     baseViewModel: BaseViewModel;
 
-    bind() {
-        this.apiUrl = "http://fc020e41.ngrok.io/gb/api/v1/Bookings/FilterBookings/1"
+    bind() {        
         this.baseViewModel.setup();
+        this.apiUrl = this.baseViewModel.apiUrl + "FilterBookings/1"
         this.setup();
     }
 
@@ -31,11 +31,11 @@ export class Bookings {
         this.bookingFromDate = null;
         this.bookingToDate = "13/12/2016";
         this.isCancelled = false;
-        this.baseViewModel.mgr.getUser().then(function (user) {
-            if (user) {
+        ////this.baseViewModel.mgr.getUser().then(function (user) {
+        ////    if (user) {
                 _this.fetchBookings();
-            }
-        });
+        ////    }
+        ////});
     }
 
     fetchBookings() {
@@ -45,15 +45,15 @@ export class Bookings {
             toDate: _this.bookingToDate,
             isCancelled: _this.isCancelled
         };
-        this.baseViewModel.mgr.getUser().then(function (user) {
+        ////this.baseViewModel.mgr.getUser().then(function (user) {
 
-            _this.http.configure(config => {
-                config.withDefaults({
-                    headers: {
-                        'Authorization': "Bearer " + user.access_token
-                    }
-                })
-            });
+        ////    _this.http.configure(config => {
+        ////        config.withDefaults({
+        ////            headers: {
+        ////                'Authorization': "Bearer " + user.access_token
+        ////            }
+        ////        })
+        ////    });
 
             return _this.http.fetch(_this.apiUrl, {
                 method: "POST",
@@ -70,7 +70,7 @@ export class Bookings {
                         $('#example2').show();
                     }, 500);
                 });
-        });
+        ////});
     }
 
     deleteBooking(bookingId) {

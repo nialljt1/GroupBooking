@@ -25,7 +25,7 @@ namespace Api.Data
             diner.AddedBySurname = dinerModel.AddedBySurname;
             diner.AddedByEmailAddress = dinerModel.AddedByEmailAddress;
             diner.AddedAt = DateTimeOffset.Now;
-            diner.LastUpdatedById = dinerModel.UserId;
+            diner.LastUpdatedById = dinerModel.UpdatedByUserId;
             diner.LastUpdatedAt = DateTimeOffset.Now;
             _appContext.Diners.Add(diner);
             _appContext.SaveChanges();
@@ -37,7 +37,7 @@ namespace Api.Data
             var diner = _appContext.Diners.Find(dinerModel.Id);
             diner.Forename = dinerModel.Forename;
             diner.Surname = dinerModel.Surname;
-            diner.LastUpdatedById = dinerModel.UserId;
+            diner.LastUpdatedById = dinerModel.UpdatedByUserId;
             diner.LastUpdatedAt = DateTimeOffset.Now;
             _appContext.SaveChanges();
         }
@@ -63,12 +63,11 @@ namespace Api.Data
 
             var dinerMenuItems = _appContext.DinerMenuItems
             .Where(d => d.Diner.BookingId == bookingId)
-            .Select(s => new ClientMenuItemModel
+            .Select(s => new ClientDinerMenuItemModel
             {
                 MenuItemId = s.MenuItemId,
                 DinerId = s.DinerId,
-                Note = s.Note,
-                Number = s.MenuItem.Number,
+                DinerMenuItemNote = s.Note,
                 Name = s.MenuItem.Name,
                 Description = s.MenuItem.Description,
                 DisplayOrder = s.MenuItem.DisplayOrder,
@@ -108,7 +107,7 @@ namespace Api.Data
                         clientDinerMenuItemModel.Name = menuItem.Name;
                         clientDinerMenuItemModel.Description = menuItem.Description;
                         clientDinerMenuItemModel.DisplayOrder = menuItem.DisplayOrder;
-                        clientDinerMenuItemModel.DinerMenuItemNote = menuItem.Note;
+                        clientDinerMenuItemModel.DinerMenuItemNote = menuItem.DinerMenuItemNote;
                         diner.MenuItems.Add(clientDinerMenuItemModel);
                     }
                 }

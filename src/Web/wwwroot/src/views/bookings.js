@@ -32,8 +32,8 @@ System.register(["./baseViewModel", "aurelia-framework", 'aurelia-router', "aure
                     this.baseViewModel = baseViewModel;
                 }
                 bind() {
-                    this.apiUrl = "http://fc020e41.ngrok.io/gb/api/v1/Bookings/FilterBookings/1";
                     this.baseViewModel.setup();
+                    this.apiUrl = this.baseViewModel.apiUrl + "FilterBookings/1";
                     this.setup();
                 }
                 setup() {
@@ -41,11 +41,11 @@ System.register(["./baseViewModel", "aurelia-framework", 'aurelia-router', "aure
                     this.bookingFromDate = null;
                     this.bookingToDate = "13/12/2016";
                     this.isCancelled = false;
-                    this.baseViewModel.mgr.getUser().then(function (user) {
-                        if (user) {
-                            _this.fetchBookings();
-                        }
-                    });
+                    ////this.baseViewModel.mgr.getUser().then(function (user) {
+                    ////    if (user) {
+                    _this.fetchBookings();
+                    ////    }
+                    ////});
                 }
                 fetchBookings() {
                     var _this = this;
@@ -54,30 +54,30 @@ System.register(["./baseViewModel", "aurelia-framework", 'aurelia-router', "aure
                         toDate: _this.bookingToDate,
                         isCancelled: _this.isCancelled
                     };
-                    this.baseViewModel.mgr.getUser().then(function (user) {
-                        _this.http.configure(config => {
-                            config.withDefaults({
-                                headers: {
-                                    'Authorization': "Bearer " + user.access_token
-                                }
-                            });
-                        });
-                        return _this.http.fetch(_this.apiUrl, {
-                            method: "POST",
-                            body: aurelia_fetch_client_1.json(filterCriteria)
-                        }).
-                            then(response => response.json()).then(data => {
-                            $('#example2').hide;
-                            _this.bookings = data;
-                            ////$('#example2').DataTable().rows().clear();
-                            // TODO: Resolve timing issue in table
-                            // TODO: filtering leaves existing data in table - fix
-                            setTimeout(function () {
-                                ////$('#example2').DataTable();
-                                $('#example2').show();
-                            }, 500);
-                        });
+                    ////this.baseViewModel.mgr.getUser().then(function (user) {
+                    ////    _this.http.configure(config => {
+                    ////        config.withDefaults({
+                    ////            headers: {
+                    ////                'Authorization': "Bearer " + user.access_token
+                    ////            }
+                    ////        })
+                    ////    });
+                    return _this.http.fetch(_this.apiUrl, {
+                        method: "POST",
+                        body: aurelia_fetch_client_1.json(filterCriteria)
+                    }).
+                        then(response => response.json()).then(data => {
+                        $('#example2').hide;
+                        _this.bookings = data;
+                        ////$('#example2').DataTable().rows().clear();
+                        // TODO: Resolve timing issue in table
+                        // TODO: filtering leaves existing data in table - fix
+                        setTimeout(function () {
+                            ////$('#example2').DataTable();
+                            $('#example2').show();
+                        }, 500);
                     });
+                    ////});
                 }
                 deleteBooking(bookingId) {
                     this.http.fetch(this.apiUrl + bookingId, { method: "delete" }).then(() => { this.fetchBookings(); });

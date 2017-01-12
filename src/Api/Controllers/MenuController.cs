@@ -22,5 +22,13 @@ namespace Api.Controllers
         {
             return Repo.GetMenuSections(menuId);
         }
+
+        // GET GetMenuItems/1
+        [HttpGet]
+        [Route("GetMenuItems/{menuId}/{menuSectionId:int?}")]
+        public IEnumerable<ClientModels.ClientMenuItemModel> GetMenuItems(int menuId, int menuSectionId = 0)
+        {
+            return Repo.GetMenuItems(menuId, menuSectionId);
+        }
     }
 }

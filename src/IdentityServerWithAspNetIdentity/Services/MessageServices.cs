@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace IdentityServerWithAspNetIdentity.Services
 {
@@ -10,10 +7,23 @@ namespace IdentityServerWithAspNetIdentity.Services
     // For more details see this link http://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        public MailService _mailService { get; set; }
+
+        public AuthMessageSender()
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            _mailService = new MailService();
+        }
+
+        public async Task<bool> SendEmailAsync(string email, string subject, string message)
+        {
+            string from = "info@talksharp.com";
+            string to = "test@example.com";
+            subject = "hello world";
+            string body = "hello world from mailgun";
+
+            bool result = await _mailService.SendAsync(from, to, subject, body);
+
+            return result;
         }
 
         public Task SendSmsAsync(string number, string message)

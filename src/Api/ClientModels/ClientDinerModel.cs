@@ -10,9 +10,16 @@ namespace Api.ClientModels
             MenuItems = new List<ClientDinerMenuItemModel>();
         }
 
+        [Required]
         public int Id { get; set; }
+
+        [Required]
         public int BookingId { get; set; }
+
+        [Required, StringLength(50)]
         public string Forename { get; set; }
+
+        [Required, StringLength(50)]
         public string Surname { get; set; }
         [StringLength(50)]
         public string AddedByForename { get; set; }
@@ -20,7 +27,7 @@ namespace Api.ClientModels
         public string AddedBySurname { get; set; }
         [StringLength(256)]
         public string AddedByEmailAddress { get; set; }
-        public string UserId { get; set; }
+        public string UpdatedByUserId { get; set; }
         public IList<ClientDinerMenuItemModel> MenuItems { get; set; }
     }
 }

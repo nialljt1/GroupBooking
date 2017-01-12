@@ -2,7 +2,7 @@
 
 namespace Api.ClientModels
 {
-    public class ClientMenuSectionModel
+    public class ClientMenuModel
     {
         [Required]
         public int Id { get; set; }

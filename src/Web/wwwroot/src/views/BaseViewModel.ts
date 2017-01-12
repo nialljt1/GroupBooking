@@ -15,15 +15,15 @@ export class BaseViewModel {
     }
 
     setup() {
-        this.apiUrl = "http://fc020e41.ngrok.io/gb/api/v1/Bookings/"
-        var config = {
-            authority: "http://localhost/IdentityServer2",
-            client_id: "js",
-            redirect_uri: "http://localhost/GroupBookingApp/src/callback.html",
-            response_type: "id_token token",
-            scope: "openid profile api1",
-            post_logout_redirect_uri: "http://localhost/GroupBookingApp/index.html",
-        };
-        this.mgr = new Oidc.UserManager(config);
+        this.apiUrl = "http://f2c4a73f.ngrok.io/gb/api/v1/Bookings/"
+        ////var config = {
+        ////    authority: "http://localhost/IdentityServer2",
+        ////    client_id: "js",
+        ////    redirect_uri: "http://localhost/GroupBookingApp/src/callback.html",
+        ////    response_type: "id_token token",
+        ////    scope: "openid profile api1",
+        ////    post_logout_redirect_uri: "http://localhost/GroupBookingApp/index.html",
+        ////};
+        ////this.mgr = new Oidc.UserManager(config);
     }
 }

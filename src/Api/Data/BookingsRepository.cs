@@ -29,6 +29,7 @@ namespace Api.Data
             booking.LastUpdatedAt = DateTimeOffset.Now;
             booking.CreatedAt = DateTimeOffset.Now;
             // TODO: remove hardcoding of menu id
+            booking.MenuId = clientBooking.MenuId;
             booking.MenuId = 1;
             _appContext.Bookings.Add(booking);
             _appContext.SaveChanges();
@@ -86,6 +87,7 @@ namespace Api.Data
                     EmailAddress = b.OrganiserEmailAddress,
                     StartingAt = b.StartingAt,
                     NumberOfDiners = b.NumberOfDiners,
+                    MenuId = b.MenuId,
                     Menu = b.Menu.Name
                 })
                 .OrderByDescending(b => b.StartingAt)

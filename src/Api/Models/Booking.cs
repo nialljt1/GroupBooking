@@ -27,11 +27,12 @@ namespace Api.Models
         [Required, StringLength(50)]
         public string OrganiserSurname { get; set; }
 
-        [Required, StringLength(100)]
+        [Required, StringLength(256)]
         public string OrganiserEmailAddress { get; set; }
         [Required, StringLength(50)]
         public string OrganiserTelephoneNumber { get; set; }
 
+        [Required]
         public int NumberOfDiners { get; set; }
         [Required]
         public DateTimeOffset CreatedAt { get; set; }

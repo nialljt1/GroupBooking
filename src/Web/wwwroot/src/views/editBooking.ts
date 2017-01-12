@@ -41,21 +41,21 @@ export class EditBooking {
 
     loadBooking() {
         var _this = this;
-        this.baseViewModel.mgr.getUser().then(function (user) {
-            if (user)
-            {
-                _this.http.configure(config => {
-                    config
-                        .withDefaults({
-                            headers: {
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'Fetch',
-                                'Authorization': "Bearer " + user.access_token
-                            }
-                        })
+        ////this.baseViewModel.mgr.getUser().then(function (user) {
+            ////if (user)
+            ////{
+            ////    _this.http.configure(config => {
+            ////        config
+            ////            .withDefaults({
+            ////                headers: {
+            ////                    'Accept': 'application/json',
+            ////                    'X-Requested-With': 'Fetch',
+            ////                    'Authorization': "Bearer " + user.access_token
+            ////                }
+            ////            })
 
-                });
-            }
+            ////    });
+            ////}
 
             _this.http.fetch(_this.apiUrl, {
                 method: "get"
@@ -66,13 +66,13 @@ export class EditBooking {
                     _this.booking.bookingTime = _this.dateFormatValueConverter.toTime(_this.booking.startingAt);
                 console.log("booking loaded: ", response);
             });
-        });    
+        ////});    
     }
 
     updateBooking() {
         var _this = this;
         _this.apiUrl = this.baseViewModel.apiUrl + "Update";
-        this.baseViewModel.mgr.getUser().then(function (user) {
+        ////this.baseViewModel.mgr.getUser().then(function (user) {
             var booking = {
                 id: _this.booking.id,
                 firstName: _this.booking.firstName,
@@ -82,19 +82,19 @@ export class EditBooking {
                 startingAt: new Date(_this.dateFormatValueConverter.toUSDate(_this.booking.bookingDate) + " " + _this.booking.bookingTime),
                 numberOfDiners: _this.booking.numberOfDiners
             };
-            if (user) {
-                _this.http.configure(config => {
-                    config
-                        .withDefaults({
-                            headers: {
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'Fetch',
-                                'Authorization': "Bearer " + user.access_token
-                            }
-                        })
+            ////if (user) {
+            ////    _this.http.configure(config => {
+            ////        config
+            ////            .withDefaults({
+            ////                headers: {
+            ////                    'Accept': 'application/json',
+            ////                    'X-Requested-With': 'Fetch',
+            ////                    'Authorization': "Bearer " + user.access_token
+            ////                }
+            ////            })
 
-                });
-            }
+            ////    });
+            ////}
 
             _this.http.fetch(_this.apiUrl, {
                 method: "put",
@@ -104,7 +104,7 @@ export class EditBooking {
                 console.log("booking added: ", response);
             });
 
-        });
+        ////});
     }
 }
 
