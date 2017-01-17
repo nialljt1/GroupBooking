@@ -16,10 +16,13 @@ namespace Api.Models
         }
         public int Id { get; set; }
 
+        public Guid Identifier { get; set; }
+
         public int MenuId { get; set; }
         public virtual Menu Menu { get; set; }
 
         public DateTime StartingAt { get; set; }
+        public DateTime CutOffDate { get; set; }
 
         [Required, StringLength(50)]
         public string OrganiserForename { get; set; }

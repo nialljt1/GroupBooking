@@ -21,8 +21,6 @@ namespace Api.Data
             diner.Forename = dinerModel.Forename;
             diner.Surname = dinerModel.Surname;
             diner.BookingId = dinerModel.BookingId;
-            diner.AddedByForename = dinerModel.AddedByForename;
-            diner.AddedBySurname = dinerModel.AddedBySurname;
             diner.AddedByEmailAddress = dinerModel.AddedByEmailAddress;
             diner.AddedAt = DateTimeOffset.Now;
             diner.LastUpdatedById = dinerModel.UpdatedByUserId;
@@ -82,8 +80,6 @@ namespace Api.Data
                 Forename = d.Forename,
                 Surname = d.Surname,
                 AddedByEmailAddress = d.AddedByEmailAddress,
-                AddedByForename = d.AddedByForename,
-                AddedBySurname = d.AddedBySurname,
                 BookingId = bookingId
             })
             .OrderBy(d => d.Surname)

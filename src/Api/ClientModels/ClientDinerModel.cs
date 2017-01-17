@@ -22,10 +22,6 @@ namespace Api.ClientModels
         [Required, StringLength(50)]
         public string Surname { get; set; }
         [StringLength(50)]
-        public string AddedByForename { get; set; }
-        [StringLength(50)]
-        public string AddedBySurname { get; set; }
-        [StringLength(256)]
         public string AddedByEmailAddress { get; set; }
         public string UpdatedByUserId { get; set; }
         public IList<ClientDinerMenuItemModel> MenuItems { get; set; }

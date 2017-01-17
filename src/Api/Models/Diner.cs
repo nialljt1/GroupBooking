@@ -23,10 +23,6 @@ namespace Api.Models
         public string Surname { get; set; }
 
         public DateTimeOffset AddedAt { get; set; }
-        [Required, StringLength(50)]
-        public string AddedByForename { get; set; }
-        [Required, StringLength(50)]
-        public string AddedBySurname { get; set; }
         [Required, StringLength(256)]
         public string AddedByEmailAddress { get; set; }
         public string LastUpdatedById { get; set; }

@@ -8,9 +8,10 @@ using Api;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20170117214033_RemoveAddedByFieldsAddCutOff")]
+    partial class RemoveAddedByFieldsAddCutOff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -29,7 +30,7 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("CutOffDate");
 
-                    b.Property<Guid>("Identifier");
+                    b.Property<Guid?>("Identifier");
 
                     b.Property<bool>("IsCancelled");
 

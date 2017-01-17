@@ -10,6 +10,10 @@ namespace Api.ClientModels
     {
         [Required]
         public int Id { get; set; }
+
+        [Required]
+        public Guid Identifier { get; set; }
+
         [Required, StringLength(50)]
         public string FirstName { get; set; }
         [Required, StringLength(50)]
@@ -22,6 +26,8 @@ namespace Api.ClientModels
         public string TelephoneNumber { get; set; }
         [Required]
         public DateTime StartingAt { get; set; }
+        [Required]
+        public DateTime CutOffDate { get; set; }
         [Required]
         public int NumberOfDiners { get; set; }
         [Required]

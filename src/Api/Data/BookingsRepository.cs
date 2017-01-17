@@ -18,12 +18,15 @@ namespace Api.Data
         public int AddBooking(ClientBookingModel clientBooking)
         {
             var booking = new Booking();
+            booking.Identifier = new Guid();
             booking.OrganiserForename = clientBooking.FirstName;
             booking.OrganiserSurname = clientBooking.Surname;
             booking.OrganiserTelephoneNumber = clientBooking.TelephoneNumber;
             booking.OrganiserEmailAddress = clientBooking.EmailAddress;
             booking.StartingAt = clientBooking.StartingAt;
+            booking.CutOffDate = clientBooking.CutOffDate;
             booking.NumberOfDiners = clientBooking.NumberOfDiners;
+            // TODO: remove hardcoding of CreatedById and LastUpdatedById
             booking.CreatedById = "0d20e665-2859-418e-ae12-bece795627df";
             booking.LastUpdatedById = "0d20e665-2859-418e-ae12-bece795627df";
             booking.LastUpdatedAt = DateTimeOffset.Now;
@@ -44,6 +47,7 @@ namespace Api.Data
             booking.OrganiserTelephoneNumber = clientBooking.TelephoneNumber;
             booking.OrganiserEmailAddress = clientBooking.EmailAddress;
             booking.StartingAt = clientBooking.StartingAt;
+            booking.CutOffDate = clientBooking.CutOffDate;
             booking.NumberOfDiners = clientBooking.NumberOfDiners;
             booking.CreatedById = "0d20e665-2859-418e-ae12-bece795627df";
             booking.LastUpdatedById = "0d20e665-2859-418e-ae12-bece795627df";
@@ -81,11 +85,13 @@ namespace Api.Data
                 .Select(b => new ClientBookingModel
                 {
                     Id  = b.Id,
+                    Identifier = b.Identifier,
                     FirstName = b.OrganiserForename,
                     Surname = b.OrganiserSurname,
                     TelephoneNumber = b.OrganiserTelephoneNumber,
                     EmailAddress = b.OrganiserEmailAddress,
                     StartingAt = b.StartingAt,
+                    CutOffDate = b.CutOffDate,
                     NumberOfDiners = b.NumberOfDiners,
                     MenuId = b.MenuId,
                     Menu = b.Menu.Name
@@ -101,11 +107,13 @@ namespace Api.Data
             return new ClientBookingModel
             {
                 Id = booking.Id,
+                Identifier = booking.Identifier,
                 FirstName = booking.OrganiserForename,
                 Surname = booking.OrganiserSurname,
                 TelephoneNumber = booking.OrganiserTelephoneNumber,
                 EmailAddress = booking.OrganiserEmailAddress,
                 StartingAt = booking.StartingAt,
+                CutOffDate = booking.CutOffDate,
                 NumberOfDiners = booking.NumberOfDiners,
                 Menu = menuName
             };            
