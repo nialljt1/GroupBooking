@@ -8,6 +8,7 @@ using IdentityServer4.Quickstart.UI.Models;
 
 namespace IdentityServerWithAspNetIdentity.Controllers
 {
+    ////[RequireHttps]
     public class HomeController : Controller
     {
         private readonly IIdentityServerInteractionService _interaction;

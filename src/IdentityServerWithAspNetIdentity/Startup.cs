@@ -15,6 +15,8 @@ using QuickstartIdentityServer;
 using IdentityServer4.Services;
 using IdentityModel;
 using IdentityServerWithAspNetIdentity.Data;
+using Microsoft.AspNetCore.Mvc;
+using Exceptionless;
 
 namespace IdentityServerWithAspNetIdentity
 {
@@ -46,11 +48,20 @@ namespace IdentityServerWithAspNetIdentity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            ////services.Configure<MvcOptions>(options =>
+            ////{
+            ////    options.Filters.Add(new RequireHttpsAttribute());
+            ////});
+
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -93,6 +104,7 @@ namespace IdentityServerWithAspNetIdentity
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseExceptionless("d8YPf5iMRQYRRu6n909GlWfNDaUd2eFWD40GSmho");
         }
     }
 }

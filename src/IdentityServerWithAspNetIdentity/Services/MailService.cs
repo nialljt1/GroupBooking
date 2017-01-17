@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 public class MailService
 {
     // the domain name you have verified in your Mailgun account
-    const string DOMAIN = "example.com";
+    const string DOMAIN = "groupbookit.com";
 
     // your API Key used to send mail through the Mailgun API
-    const string API_KEY = "key-00000000000000000000000000000000";
+    const string API_KEY = "key-d695922956fc20ab3496c9db4fa303d1";
 
     public async Task<bool> SendAsync(string from, string to, string subject, string message)
     {

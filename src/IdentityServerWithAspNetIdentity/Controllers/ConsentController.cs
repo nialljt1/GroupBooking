@@ -16,6 +16,7 @@ namespace IdentityServer4.Quickstart.UI.Controllers
     /// <summary>
     /// This controller implements the consent logic
     /// </summary>
+    ////[RequireHttps]
     public class ConsentController : Controller
     {
         private readonly ILogger<ConsentController> _logger;

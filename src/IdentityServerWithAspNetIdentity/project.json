@@ -45,7 +45,8 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "System.Net.Http": "4.3.0"
+    "System.Net.Http": "4.3.0",
+    "Exceptionless.AspNetCore": "4.0.1924"
   },
 
   "tools": {

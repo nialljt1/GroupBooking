@@ -32,15 +32,17 @@ System.register(["./views/baseViewModel", "aurelia-framework", "aurelia-router"]
                 }
                 setup() {
                     var _this = this;
-                    ////this.baseViewModel.mgr.getUser().then(function (user) {
-                    ////    if (user) {
-                    ////        _this.isLoggedIn = true;                
-                    ////    }
-                    ////    else {
-                    ////        _this.baseViewModel.mgr.signinRedirect();
-                    ////        _this.isLoggedIn = false;
-                    ////    }
-                    ////});
+                    if (this.baseViewModel.mgr != null) {
+                        this.baseViewModel.mgr.getUser().then(function (user) {
+                            if (user) {
+                                _this.isLoggedIn = true;
+                            }
+                            else {
+                                _this.baseViewModel.mgr.signinRedirect();
+                                _this.isLoggedIn = false;
+                            }
+                        });
+                    }
                 }
                 configureRouter(config, router) {
                     this.router = router;
