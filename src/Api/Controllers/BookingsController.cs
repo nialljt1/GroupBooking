@@ -46,8 +46,7 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        [Route("Update")]
-        public IActionResult Update([FromBody] ClientBookingModel booking)
+        public IActionResult Put([FromBody] ClientBookingModel booking)
         {
             if (!ModelState.IsValid)
             {
@@ -69,15 +68,15 @@ namespace Api.Controllers
 
         // GET api/bookings/2
         [HttpGet()]
-        [Route("GetBookingById/{id}")]
-        public ClientBookingModel GetBookingById(int id)
+        [Route("{id}")]
+        public ClientBookingModel Get(int id)
         {
-            return Repo.GetBookingById(id);
+            return Repo.Get(id);
         }
 
 
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("{id}")]
         public IActionResult Delete(int id)
         {
             try

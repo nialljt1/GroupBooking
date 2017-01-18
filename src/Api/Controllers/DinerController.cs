@@ -20,7 +20,6 @@ namespace Api.Controllers
 
         // Post
         [HttpPost]
-        [Route("Post")]
         public IActionResult Post([FromBody] ClientDinerModel dinerModel)
         {
             if (!ModelState.IsValid)
@@ -41,7 +40,6 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        [Route("Put")]
         public IActionResult Put([FromBody] ClientDinerModel dinerModel)
         {
             if (!ModelState.IsValid)
@@ -62,7 +60,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("{id}")]
         public IActionResult Delete(int id)
         {
             try

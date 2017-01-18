@@ -100,7 +100,7 @@ namespace Api.Data
                 .ToList();
         }
 
-        public ClientBookingModel GetBookingById(int id)
+        public ClientBookingModel Get(int id)
         {
             var booking = _appContext.Bookings.Find(id);
             var menuName = _appContext.Menus.Find(booking.MenuId).Name;

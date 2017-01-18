@@ -35,7 +35,7 @@ System.register(["./baseViewModel", "./../Components/date-format", "aurelia-fram
                 }
                 activate(params) {
                     this.baseViewModel.setup();
-                    this.apiUrl = this.baseViewModel.apiUrl + "GetBookingById/" + params.id;
+                    this.apiUrl = this.baseViewModel.apiUrl + "/" + params.id;
                     this.loadBooking();
                 }
                 showBookingDetails() {
@@ -106,7 +106,7 @@ System.register(["./baseViewModel", "./../Components/date-format", "aurelia-fram
                         method: "put",
                         body: aurelia_fetch_client_1.json(booking)
                     }).then(response => {
-                        console.log("booking added: ", response);
+                        console.log("booking updated: ", response);
                     });
                     ////});
                 }

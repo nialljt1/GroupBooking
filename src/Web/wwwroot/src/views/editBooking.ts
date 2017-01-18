@@ -20,7 +20,7 @@ export class EditBooking {
 
     activate(params) {
         this.baseViewModel.setup();
-        this.apiUrl = this.baseViewModel.apiUrl + "GetBookingById/" + params.id
+        this.apiUrl = this.baseViewModel.apiUrl + "/" + params.id
         this.loadBooking();
     }
 
@@ -101,7 +101,7 @@ export class EditBooking {
                 body: json(booking)
 
             }).then(response => {
-                console.log("booking added: ", response);
+                console.log("booking updated: ", response);
             });
 
         ////});

@@ -9,7 +9,7 @@ namespace Api.Data
         int AddBooking(ClientBookingModel booking);
 
         void UpdateBooking(ClientBookingModel booking);
-        ClientBookingModel GetBookingById(int id);
+        ClientBookingModel Get(int id);
         IList<ClientBookingModel> FilterBookings(int restaurantId, FilterCriteria filterCriteria);
         void DeleteBooking(int id);
     }
