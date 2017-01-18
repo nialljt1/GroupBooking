@@ -56,6 +56,13 @@ namespace Api.Data
             _appContext.SaveChanges();
         }
 
+        public void UpdateStatus(Guid bookingId, int statusId)
+        {
+            var booking = _appContext.Bookings.Find(bookingId);
+            booking.StatusId = statusId;
+            _appContext.SaveChanges();
+        }
+
         public IList<ClientBookingModel> FilterBookings(int restaurantId, FilterCriteria filterCriteria)
         {
             var bookings = _appContext.Bookings

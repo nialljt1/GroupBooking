@@ -20,7 +20,7 @@ namespace Api.Data
             var diner = new Diner();
             diner.Forename = dinerModel.Forename;
             diner.Surname = dinerModel.Surname;
-            ////diner.BookingId = dinerModel.BookingId;
+            diner.BookingId = dinerModel.BookingId;
             diner.AddedByEmailAddress = dinerModel.AddedByEmailAddress;
             diner.AddedAt = DateTimeOffset.Now;
             diner.LastUpdatedById = dinerModel.UpdatedByUserId;

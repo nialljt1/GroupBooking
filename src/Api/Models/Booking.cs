@@ -17,6 +17,8 @@ namespace Api.Models
 
         public Guid Id { get; set; }
 
+        public int StatusId { get; set; }
+
         public int MenuId { get; set; }
         public virtual Menu Menu { get; set; }
 
@@ -55,5 +57,10 @@ namespace Api.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Diner> Diners { get; set; }
+
+        public BookingStatusType GetStatus()
+        {
+            return (BookingStatusType)StatusId;
+        }
     }
 }

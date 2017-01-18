@@ -71,7 +71,7 @@ export class EditBooking {
 
     updateBooking() {
         var _this = this;
-        _this.apiUrl = this.baseViewModel.apiUrl + "Update";
+        _this.apiUrl = this.baseViewModel.apiUrl;
         ////this.baseViewModel.mgr.getUser().then(function (user) {
             var booking = {
                 id: _this.booking.id,

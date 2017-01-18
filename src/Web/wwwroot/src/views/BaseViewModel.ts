@@ -15,7 +15,7 @@ export class BaseViewModel {
     }
 
     setup() {
-        this.apiUrl = "http://f2c4a73f.ngrok.io/gb/api/v1/Bookings/"
+        this.apiUrl = "http://b1f4edd3.ngrok.io/gb/api/v1/Bookings/"
         ////var config = {
         ////    authority: "http://localhost/IdentityServer2",
         ////    client_id: "js",

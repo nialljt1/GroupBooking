@@ -66,6 +66,23 @@ namespace Api.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("UpdateStatus/{bookingId}/{statusId}")]
+        public IActionResult UpdateStatus(Guid bookingId, int statusId)
+        {
+            try
+            {
+                Repo.UpdateStatus(bookingId, statusId);
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                return BadRequest();
+            }
+        }
+
         // GET api/bookings/2
         [HttpGet()]
         [Route("{id}")]
