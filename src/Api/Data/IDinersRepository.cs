@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Api.Models;
 using Api.ClientModels;
+using System;
 
 namespace Api.Data
 {
@@ -9,6 +10,6 @@ namespace Api.Data
         int AddDiner(ClientDinerModel diner);
         void UpdateDiner(ClientDinerModel diner);
         void DeleteDiner(int id);
-        IList<ClientDinerModel> GetDinersForBooking(int bookingId);
+        IList<ClientDinerModel> GetDinersForBooking(Guid bookingId);
     }
 }

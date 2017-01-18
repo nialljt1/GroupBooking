@@ -78,7 +78,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetDinersForBooking/{bookingId}")]
-        public IEnumerable<ClientDinerModel> GetDinersForBooking(int bookingId)
+        public IEnumerable<ClientDinerModel> GetDinersForBooking(Guid bookingId)
         {
             try
             {

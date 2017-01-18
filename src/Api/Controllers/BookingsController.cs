@@ -69,7 +69,7 @@ namespace Api.Controllers
         // GET api/bookings/2
         [HttpGet()]
         [Route("{id}")]
-        public ClientBookingModel Get(int id)
+        public ClientBookingModel Get(Guid id)
         {
             return Repo.Get(id);
         }
@@ -77,7 +77,7 @@ namespace Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {

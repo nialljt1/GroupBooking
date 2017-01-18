@@ -8,9 +8,10 @@ using Api;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20170118111940_ChangeBookingIdToGuid")]
+    partial class ChangeBookingIdToGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -18,7 +19,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Api.Models.Booking", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("Identifier")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTimeOffset>("CreatedAt");
@@ -59,7 +60,7 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("StartingAt");
 
-                    b.HasKey("Id");
+                    b.HasKey("Identifier");
 
                     b.HasIndex("CreatedById");
 

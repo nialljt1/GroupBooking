@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Api.ClientModels
@@ -14,7 +15,7 @@ namespace Api.ClientModels
         public int Id { get; set; }
 
         [Required]
-        public int BookingId { get; set; }
+        public Guid BookingId { get; set; }
 
         [Required, StringLength(50)]
         public string Forename { get; set; }

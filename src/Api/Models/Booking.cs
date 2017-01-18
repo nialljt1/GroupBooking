@@ -14,9 +14,8 @@ namespace Api.Models
             CreatedAt = DateTimeOffset.Now;
 
         }
-        public int Id { get; set; }
 
-        public Guid Identifier { get; set; }
+        public Guid Id { get; set; }
 
         public int MenuId { get; set; }
         public virtual Menu Menu { get; set; }

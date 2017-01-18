@@ -13,7 +13,7 @@ namespace Api.Models
             DinerMenuItems = new HashSet<DinerMenuItem>();
         }
         public int Id { get; set; }
-        public int BookingId { get; set; }
+        public Guid BookingId { get; set; }
         public virtual Booking Booking { get; set; }
 
         [Required, StringLength(50)]

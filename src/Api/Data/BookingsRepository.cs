@@ -15,10 +15,10 @@ namespace Api.Data
             _appContext = appContext;
         }
 
-        public int AddBooking(ClientBookingModel clientBooking)
+        public Guid AddBooking(ClientBookingModel clientBooking)
         {
             var booking = new Booking();
-            booking.Identifier = new Guid();
+            booking.Id = new Guid();
             booking.OrganiserForename = clientBooking.FirstName;
             booking.OrganiserSurname = clientBooking.Surname;
             booking.OrganiserTelephoneNumber = clientBooking.TelephoneNumber;
@@ -85,7 +85,6 @@ namespace Api.Data
                 .Select(b => new ClientBookingModel
                 {
                     Id  = b.Id,
-                    Identifier = b.Identifier,
                     FirstName = b.OrganiserForename,
                     Surname = b.OrganiserSurname,
                     TelephoneNumber = b.OrganiserTelephoneNumber,
@@ -100,14 +99,13 @@ namespace Api.Data
                 .ToList();
         }
 
-        public ClientBookingModel Get(int id)
+        public ClientBookingModel Get(Guid id)
         {
             var booking = _appContext.Bookings.Find(id);
             var menuName = _appContext.Menus.Find(booking.MenuId).Name;
             return new ClientBookingModel
             {
                 Id = booking.Id,
-                Identifier = booking.Identifier,
                 FirstName = booking.OrganiserForename,
                 Surname = booking.OrganiserSurname,
                 TelephoneNumber = booking.OrganiserTelephoneNumber,
@@ -119,7 +117,7 @@ namespace Api.Data
             };            
         }
 
-        public void DeleteBooking(int id)
+        public void DeleteBooking(Guid id)
         {
             var booking = _appContext.Bookings.Find(id);
             _appContext.Bookings.Remove(booking);
