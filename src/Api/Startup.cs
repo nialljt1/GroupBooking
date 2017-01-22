@@ -57,7 +57,19 @@ namespace Api
 
                     policy.WithOrigins("http://127.0.0.1:8080")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();                    
+                    .AllowAnyMethod();
+
+                    policy.WithOrigins("http://169.50.111.5")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                    policy.WithOrigins("http://127.0.0.1:8081")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                    policy.WithOrigins("http://169.50.111.5")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
 
                 ////// this defines a CORS policy called "default"
