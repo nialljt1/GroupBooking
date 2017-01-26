@@ -1,4 +1,5 @@
 ﻿using Api.ClientModels;
+using Api.CORS;
 using Api.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace Api.Controllers
 {
     [RoutePrefix("api/v1/Diner")]
     ////[Authorize]
+    [MyCorsPolicy]
     public class DinerController : ApiController
     {
         private readonly AppContext _appContext;

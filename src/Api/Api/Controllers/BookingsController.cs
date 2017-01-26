@@ -7,11 +7,14 @@ using System.Net.Http;
 using System.Net;
 using Api.Models;
 using System.Linq;
+using System.Web.Http.Cors;
+using Api.CORS;
 
 namespace Api.Controllers
 {
     [RoutePrefix("api/v1/Bookings")]
     ////[Authorize]
+    [MyCorsPolicy]
     public class BookingsController: ApiController
     {
         private readonly AppContext _appContext;

@@ -1,4 +1,5 @@
 ﻿using Api.ClientModels;
+using Api.CORS;
 using Api.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Api.Controllers
 {
     [RoutePrefix("api/v1/Menu")]
     ////[Authorize]
+    [MyCorsPolicy]
     public class MenuController : ApiController
     {
         private readonly AppContext _appContext;
