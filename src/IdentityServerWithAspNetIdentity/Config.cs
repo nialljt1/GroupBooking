@@ -108,15 +108,15 @@ namespace QuickstartIdentityServer
                     
                     RedirectUris = new List<string>
                     {
-                        "http://localhost/GroupBookingApp/src/callback.html"
+                        "http://groupbookit.com/src/callback.html"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost/GroupBookingApp/src/index.html"
+                        "http://groupbookit.com/src/index.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "http://localhost/GroupBookingApp"
+                        "http://groupbookit.com"
                     },
 
                     AllowedScopes = new List<string>

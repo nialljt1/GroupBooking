@@ -15,7 +15,7 @@ export class BaseViewModel {
     }
 
     setup() {
-        this.apiUrl = "http://www.gb-api.groupbookit.com/api/v1/Bookings/"
+        this.apiUrl = "http://www.api.groupbookit.com/api/v1/Bookings/"
         ////var config = {
         ////    authority: "http://localhost/IdentityServer2",
         ////    client_id: "js",

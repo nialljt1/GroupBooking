@@ -28,6 +28,15 @@ System.register(["./baseViewModel", "aurelia-framework", "aurelia-fetch-client"]
                 }
                 activate() {
                     this.baseViewModel.setup();
+                    var config = {
+                        authority: "http://identity.groupbookit.com",
+                        client_id: "js",
+                        redirect_uri: "http://groupbookit.com/src/callback.html",
+                        response_type: "id_token token",
+                        scope: "openid profile api1",
+                        post_logout_redirect_uri: "http://groupbookit.com/index.html",
+                    };
+                    this.baseViewModel.mgr = new Oidc.UserManager(config);
                 }
                 login() {
                     this.baseViewModel.mgr.signinRedirect();
