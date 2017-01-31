@@ -11,6 +11,7 @@ using Api.ClientModels;
 using System.Linq;
 using Exceptionless;
 using System.Text;
+using System.Web.Http;
 
 namespace Api.Controllers
 {
@@ -111,11 +112,13 @@ namespace Api.Controllers
         }
 
         // GET GetBookings/1
-        [HttpPost]
-        [Route("FilterBookings/{restaurantId}")]
-        public IEnumerable<ClientBookingModel> FilterBookings(int restaurantId, [FromBody] FilterCriteria filterCriteria)
+        [HttpGet]
+        [Route("FilterBookings")]
+        public IEnumerable<ClientBookingModel> FilterBookings([FromQuery] string fromDate, [FromQuery] string toDate, [FromQuery] bool isCancelled)
         {
-            return Repo.FilterBookings(restaurantId, filterCriteria);
+            // TODO: Get Restaurant Id from user
+            var restaurantId = 1;
+            return Repo.FilterBookings(restaurantId, fromDate, toDate, isCancelled);
         }
 
         [HttpGet]

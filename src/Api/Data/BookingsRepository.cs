@@ -63,30 +63,31 @@ namespace Api.Data
             _appContext.SaveChanges();
         }
 
-        public IList<ClientBookingModel> FilterBookings(int restaurantId, FilterCriteria filterCriteria)
+        public IList<ClientBookingModel> FilterBookings(int restaurantId, string fromDate, string toDate, bool isCancelled)
         {
-            var bookings = _appContext.Bookings
+
+                var bookings = _appContext.Bookings
                 .Where(b => b.Menu.RestaurantId == restaurantId);
 
-            if (filterCriteria.FromDate != null)
+            if (fromDate != null)
             {
                 DateTime fromDateAsDate;
-                if (DateTime.TryParse(filterCriteria.FromDate, out fromDateAsDate))
+                if (DateTime.TryParse(fromDate, out fromDateAsDate))
                 {
-                    bookings = bookings.Where(b => b.StartingAt <= fromDateAsDate);
+                    bookings = bookings.Where(b => b.StartingAt >= fromDateAsDate);
                 }                
             }
 
-            if (filterCriteria.ToDate != null)
+            if (toDate != null)
             {
                 DateTime toDateAsDate;
-                if (DateTime.TryParse(filterCriteria.ToDate, out toDateAsDate))
+                if (DateTime.TryParse(toDate, out toDateAsDate))
                 {
                     bookings = bookings.Where(b => b.StartingAt <= toDateAsDate.AddDays(1));
                 }
             }
 
-            bookings = bookings.Where(b => b.IsCancelled == filterCriteria.isCancelled); 
+            bookings = bookings.Where(b => b.IsCancelled == isCancelled); 
 
             return bookings
                 .Select(b => new ClientBookingModel

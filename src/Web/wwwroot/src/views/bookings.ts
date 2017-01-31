@@ -22,7 +22,7 @@ export class Bookings {
 
     bind() {        
         this.baseViewModel.setup();
-        this.apiUrl = this.baseViewModel.apiUrl + "FilterBookings/1"
+        this.apiUrl = this.baseViewModel.apiUrl + "FilterBookings"
         this.setup();
     }
 
@@ -40,11 +40,6 @@ export class Bookings {
 
     fetchBookings() {
         var _this = this;
-        var filterCriteria = {
-            fromDate: _this.bookingFromDate,
-            toDate: _this.bookingToDate,
-            isCancelled: _this.isCancelled
-        };
         ////this.baseViewModel.mgr.getUser().then(function (user) {
 
         ////    _this.http.configure(config => {
@@ -55,9 +50,11 @@ export class Bookings {
         ////        })
         ////    });
 
-            return _this.http.fetch(_this.apiUrl, {
-                method: "POST",
-                body: json(filterCriteria)
+        var url = _this.apiUrl + "?fromDate=" + _this.bookingFromDate;
+        url += "toDate=" + _this.bookingToDate;
+        url += "isCancelled=" + _this.isCancelled;
+            return _this.http.fetch(url, {
+                method: "GET"
             }).
                 then(response => response.json()).then(data => {
                     $('#example2').hide

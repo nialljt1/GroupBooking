@@ -33,11 +33,4 @@ namespace Api.ClientModels
         [StringLength(50)]
         public string Menu { get; set; }
     }
-
-    public class FilterCriteria
-    {
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
-        public bool isCancelled { get; set; }
-    }
 }

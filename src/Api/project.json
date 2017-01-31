@@ -21,7 +21,8 @@
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
     "Microsoft.EntityFrameworkCore.Design": "1.1.0",
-    "Exceptionless.AspNetCore": "4.0.1924"
+    "Exceptionless.AspNetCore": "4.0.1924",
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1"
   },
 
   "tools": {
@@ -61,5 +62,6 @@
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  }
+  },
+  "userSecretsId": "aspnet-Api-20170131100221"
 }
