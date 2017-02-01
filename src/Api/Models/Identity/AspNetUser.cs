@@ -48,6 +48,9 @@ namespace Api.Models.Identity
         [StringLength(256)]
         public string UserName { get; set; }
 
+        public int? RestaurantId { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
 
