@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using System.Linq;
 
 namespace Api
 {
@@ -67,6 +67,10 @@ namespace Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
 
+                    policy.WithOrigins("http://groupbookit.com")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
                     policy.WithOrigins("http://127.0.0.1:8081")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
@@ -106,13 +110,15 @@ namespace Api
             app.UseApplicationInsightsRequestTelemetry();
             app.UseApplicationInsightsExceptionTelemetry();
 
-            ////app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            ////{
-            ////    Authority = "http://localhost/IdentityServer2",
-            ////    ScopeName = "api1",
+            var identityServerAuthority = Configuration.GetSection("ApplicationSettings").GetChildren().First(o => o.Key == "IdentityServerAuthority").Value;
 
-            ////    RequireHttpsMetadata = false
-            ////});
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = identityServerAuthority,
+                ScopeName = "api1",
+
+                RequireHttpsMetadata = false
+            });
 
             app.UseMvc();
             app.UseSwagger();

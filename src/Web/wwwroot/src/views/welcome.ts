@@ -21,6 +21,16 @@ export class Welcome {
             scope: "openid profile api1",
             post_logout_redirect_uri: "http://groupbookit.com/index.html",
         };
+
+        ////var config = {
+        ////    authority: "http://localhost/IdentityServer2",
+        ////    authority: "http://localhost:5000",            
+        ////    client_id: "js",
+        ////    redirect_uri: "http://localhost/GroupBookingApp/src/callback.html",
+        ////    response_type: "id_token token",
+        ////    scope: "openid profile api1",
+        ////    post_logout_redirect_uri: "http://localhost/GroupBookingApp/index.html",
+        ////};
         this.baseViewModel.mgr = new Oidc.UserManager(config);
     }
 

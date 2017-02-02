@@ -58,8 +58,8 @@ System.register(["./baseViewModel", "aurelia-framework", 'aurelia-router', "aure
                     ////        })
                     ////    });
                     var url = _this.apiUrl + "?fromDate=" + _this.bookingFromDate;
-                    url += "toDate=" + _this.bookingToDate;
-                    url += "isCancelled=" + _this.isCancelled;
+                    url += "&toDate=" + _this.bookingToDate;
+                    url += "&isCancelled=" + _this.isCancelled;
                     return _this.http.fetch(url, {
                         method: "GET"
                     }).

@@ -63,11 +63,24 @@ namespace Api.Data
             _appContext.SaveChanges();
         }
 
-        public IList<ClientBookingModel> FilterBookings(int restaurantId, string fromDate, string toDate, bool isCancelled)
+        public IList<ClientBookingModel> FilterBookings(string userId, string fromDate, string toDate, bool isCancelled)
         {
+            var user = _appContext.AspNetUsers
+                .FirstOrDefault(u => u.Id == userId);
 
-                var bookings = _appContext.Bookings
-                .Where(b => b.Menu.RestaurantId == restaurantId);
+            // TODO: Remove hard coding when testing security later
+            var restaurantId = 1;
+            if (user == null || user.RestaurantId == null)
+            {
+                ////return new List<ClientBookingModel>();
+            }
+            else
+            {
+                restaurantId = user.RestaurantId.Value;
+            }
+
+            var bookings = _appContext.Bookings
+            .Where(b => b.Menu.RestaurantId == restaurantId);
 
             if (fromDate != null)
             {

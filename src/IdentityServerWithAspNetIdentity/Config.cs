@@ -17,19 +17,25 @@ namespace QuickstartIdentityServer
             {
                 StandardScopes.OpenId,
                 StandardScopes.Profile,
+                StandardScopes.Email,
                 StandardScopes.OfflineAccess,
 
                 new Scope
                 {
                     Name = "api1",
                     DisplayName = "API1 access",
-                    Description = "My API"
+                    Description = "My API",
+                    Claims = 
+                    new List<ScopeClaim>
+                        {
+                            new ScopeClaim("email", alwaysInclude: true)
+                        }
                 }
             };
         }
 
         // clients want to access resources (aka scopes)
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(string webBaseUrl)
         {
             // client credentials client
             return new List<Client>
@@ -105,18 +111,18 @@ namespace QuickstartIdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
-                    
+
                     RedirectUris = new List<string>
                     {
-                        "http://groupbookit.com/src/callback.html"
+                        string.Format("{0}/src/callback.html", webBaseUrl)
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://groupbookit.com/src/index.html"
+                        string.Format("{0}/src/index.html", webBaseUrl)
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "http://groupbookit.com"
+                        webBaseUrl
                     },
 
                     AllowedScopes = new List<string>

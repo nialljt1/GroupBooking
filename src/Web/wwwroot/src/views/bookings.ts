@@ -41,7 +41,6 @@ export class Bookings {
     fetchBookings() {
         var _this = this;
         ////this.baseViewModel.mgr.getUser().then(function (user) {
-
         ////    _this.http.configure(config => {
         ////        config.withDefaults({
         ////            headers: {
@@ -51,8 +50,8 @@ export class Bookings {
         ////    });
 
         var url = _this.apiUrl + "?fromDate=" + _this.bookingFromDate;
-        url += "toDate=" + _this.bookingToDate;
-        url += "isCancelled=" + _this.isCancelled;
+        url += "&toDate=" + _this.bookingToDate;
+        url += "&isCancelled=" + _this.isCancelled;
             return _this.http.fetch(url, {
                 method: "GET"
             }).

@@ -12,6 +12,7 @@ using System.Linq;
 using Exceptionless;
 using System.Text;
 using System.Web.Http;
+using System.Security.Claims;
 
 namespace Api.Controllers
 {
@@ -116,9 +117,9 @@ namespace Api.Controllers
         [Route("FilterBookings")]
         public IEnumerable<ClientBookingModel> FilterBookings([FromQuery] string fromDate, [FromQuery] string toDate, [FromQuery] bool isCancelled)
         {
-            // TODO: Get Restaurant Id from user
-            var restaurantId = 1;
-            return Repo.FilterBookings(restaurantId, fromDate, toDate, isCancelled);
+            var claim = (User as ClaimsPrincipal).Claims.FirstOrDefault(c => c.Type == "sub");
+            var userId = claim == null ? string.Empty : claim.Value;
+            return Repo.FilterBookings(userId, fromDate, toDate, isCancelled);
         }
 
         [HttpGet]

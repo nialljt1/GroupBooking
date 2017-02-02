@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +13,8 @@ using IdentityModel;
 using IdentityServerWithAspNetIdentity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Exceptionless;
+using IdentityServerWithAspNetIdentity.Settings;
+using System.Linq;
 
 namespace IdentityServerWithAspNetIdentity
 {
@@ -67,9 +65,12 @@ namespace IdentityServerWithAspNetIdentity
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            //// see http://asp.net-hacker.rocks/2016/03/21/configure-aspnetcore.html for configuration options
+            var webBaseUrl = Configuration.GetSection("ApplicationSettings").GetChildren().First(o => o.Key == "WebBaseUrl").Value;
+            
             services.AddDeveloperIdentityServer()
                 .AddInMemoryScopes(Config.GetScopes())
-                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryClients(Config.GetClients(webBaseUrl))
                 .AddAspNetIdentity<ApplicationUser>();
         }
 

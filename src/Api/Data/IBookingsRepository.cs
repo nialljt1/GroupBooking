@@ -12,7 +12,7 @@ namespace Api.Data
         void UpdateBooking(ClientBookingModel booking);
         void UpdateStatus(Guid bookingId, int statusId);
         ClientBookingModel Get(Guid id);
-        IList<ClientBookingModel> FilterBookings(int restaurantId, string fromDate, string toDate, bool isCancelled);
+        IList<ClientBookingModel> FilterBookings(string userId, string fromDate, string toDate, bool isCancelled);
         void DeleteBooking(Guid id);
     }
 }

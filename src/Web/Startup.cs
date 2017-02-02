@@ -45,7 +45,7 @@ namespace Web
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                    .WithOrigins("http://localhost/GroupBookingApp")
+                    .WithOrigins("http://www.groupbookit.com")
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
