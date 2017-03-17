@@ -13,7 +13,7 @@ public class MailService
     const string DOMAIN = "groupbookit.com";
 
     // your API Key used to send mail through the Mailgun API
-    const string API_KEY = "key-d695922956fc20ab3496c9db4fa303d1";
+    const string API_KEY = "";
 
     public async Task<bool> SendAsync(string from, string to, string subject, string message)
     {
